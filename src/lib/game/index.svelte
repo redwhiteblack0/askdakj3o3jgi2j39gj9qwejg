@@ -10,22 +10,25 @@
 
     onMount(() => {
         window.ontouchstart = (e: any) => {
-            if(e.touches[0].clientX < pX) {
-                pX -= 10;
-            }
+            if (pochaccoRef) {
+                const pBox = pochaccoRef.getBoundingClientRect()
+                if (e.touches[0].clientX < pBox.left) {
+                    pX -= 10;
+                }
 
-            if(e.touches[0].clientX > pX) {
-                pX += 10;
-            }
+                if (e.touches[0].clientX > pBox.right) {
+                    pX += 10;
+                }
 
-            if(e.touches[0].clientY < pY) {
-                pY -= 10;
-            }
+                if (e.touches[0].clientY < pBox.bottom) {
+                    pY += 10;
+                }
 
-            if(e.touches[0].clientY < pY) {
-                pY += 10;
+                if (e.touches[0].clientY < pBox.top) {
+                    pY -= 10;
+                }
             }
-        }
+        };
         window.onkeydown = (e: any) => {
             if (e.code === "ArrowDown") {
                 if (pochaccoRef) {
@@ -51,23 +54,23 @@
                 }
             }
 
-            if(e.code === "Space") {
+            if (e.code === "Space") {
                 if (pochaccoRef) {
                     const pYNow = pY;
                     pY -= 50;
                     setTimeout(() => {
-                        pY = pYNow
-                    }, 250)
+                        pY = pYNow;
+                    }, 250);
                 }
             }
 
-            if(e.code === "KeyK") {
+            if (e.code === "KeyK") {
                 if (pochaccoImgRef) {
-                    pochaccoImgRef.src = "./pochacco-kiss-01.png"
+                    pochaccoImgRef.src = "./pochacco-kiss-01.png";
 
                     setTimeout(() => {
-                        pochaccoImgRef.src = "./pochacco-icon-01.png"
-                    }, 2500)
+                        pochaccoImgRef.src = "./pochacco-icon-01.png";
+                    }, 2500);
                 }
             }
         };
