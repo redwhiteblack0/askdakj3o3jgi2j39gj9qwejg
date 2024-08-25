@@ -16,7 +16,7 @@
                     pY -= 10;
                 }
 
-                if (e.touches[0].clientX > pBox.bottom) {
+                if (e.touches[0].clientY > pBox.bottom) {
                     pY += 10;
                 }
 
