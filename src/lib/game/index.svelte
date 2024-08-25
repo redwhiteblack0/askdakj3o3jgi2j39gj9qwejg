@@ -11,7 +11,15 @@
     onMount(() => {
         window.ontouchstart = (e: any) => {
             if (pochaccoRef) {
-                const pBox = pochaccoRef.getBoundingClientRect()
+                const pBox = pochaccoRef.getBoundingClientRect();
+                if (e.touches[0].clientY < pBox.top) {
+                    pY -= 10;
+                }
+
+                if (e.touches[0].clientX > pBox.bottom) {
+                    pY += 10;
+                }
+
                 if (e.touches[0].clientX < pBox.left) {
                     pX -= 10;
                 }
@@ -167,8 +175,8 @@
         justify-content: center;
         align-items: center;
 
-        width: 5vw;
-        height: 5vw;
+        width: 5rem;
+        height: 5rem;
     }
 
     #pochacco-icon img {
