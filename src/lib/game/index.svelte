@@ -9,6 +9,23 @@
     let pX = 0;
 
     onMount(() => {
+        window.ontouchstart = (e: any) => {
+            if(e.touches[0].clientX < pX) {
+                pX -= 10;
+            }
+
+            if(e.touches[0].clientX > pX) {
+                pX += 10;
+            }
+
+            if(e.touches[0].clientY < pY) {
+                pY -= 10;
+            }
+
+            if(e.touches[0].clientY < pY) {
+                pY += 10;
+            }
+        }
         window.onkeydown = (e: any) => {
             if (e.code === "ArrowDown") {
                 if (pochaccoRef) {
