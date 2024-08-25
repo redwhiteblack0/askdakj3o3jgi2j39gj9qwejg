@@ -12,21 +12,21 @@
         window.ontouchstart = (e: any) => {
             if (pochaccoRef) {
                 const pBox = pochaccoRef.getBoundingClientRect()
-                // if (e.touches[0].clientX < pBox.left) {
-                //     pX -= 10;
-                // }
-
-                // if (e.touches[0].clientX > pBox.right) {
-                //     pX += 10;
-                // }
-
-                if (e.touches[0].clientY < pBox.bottom) {
-                    pY += 10;
+                if (e.touches[0].clientX < pBox.left) {
+                    pX -= 10;
                 }
 
-                if (e.touches[0].clientY < pBox.top) {
-                    pY -= 10;
+                if (e.touches[0].clientX > pBox.right) {
+                    pX += 10;
                 }
+
+                // if (e.touches[0].clientY < pBox.bottom) {
+                //     pY += 10;
+                // }
+
+                // if (e.touches[0].clientY < pBox.top) {
+                //     pY -= 10;
+                // }
             }
         };
         window.onkeydown = (e: any) => {
@@ -167,8 +167,8 @@
         justify-content: center;
         align-items: center;
 
-        width: 5rem;
-        height: 5rem;
+        width: 5vw;
+        height: 5vw;
     }
 
     #pochacco-icon img {
