@@ -8,6 +8,9 @@
     let pY = 0;
     let pX = 0;
 
+    let touchstartY = 0
+    let touchendY = 0
+
     onMount(() => {
         let touchTimer: any = null;
 
@@ -20,6 +23,8 @@
         };
 
         window.ontouchstart = (e: any) => {
+            touchstartY = e.changedTouches[0].screenX
+
             if (pochaccoRef) {
                 touchTimer = setTimeout(handleKiss, 500);
             }
@@ -45,6 +50,18 @@
         };
 
         window.ontouchend = (e: any) => {
+            touchendY = e.changedTouches[0].screenX
+
+            if(pochaccoRef) {
+                if(touchendY < touchstartY) {
+                    const pYNow = pY;
+                    pY -= 50;
+                    setTimeout(() => {
+                        pY = pYNow;
+                    }, 250);
+                }
+            }
+
             if (touchTimer) {
                 clearTimeout(touchTimer);
             }
