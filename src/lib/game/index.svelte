@@ -23,7 +23,7 @@
         };
 
         window.ontouchstart = (e: any) => {
-            touchstartY = e.changedTouches[0].screenX
+            touchstartY = e.changedTouches[0].screenY
 
             if (pochaccoRef) {
                 touchTimer = setTimeout(handleKiss, 500);
@@ -50,7 +50,7 @@
         };
 
         window.ontouchend = (e: any) => {
-            touchendY = e.changedTouches[0].screenX
+            touchendY = e.changedTouches[0].screenY
 
             if(pochaccoRef) {
                 if(touchendY < touchstartY) {
