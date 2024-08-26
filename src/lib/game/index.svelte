@@ -9,7 +9,27 @@
     let pX = 0;
 
     onMount(() => {
+        let touchTimer: any = null;
+
+        const handleKiss = () => {
+            pochaccoImgRef.src = "./pochacco-kiss-01.png";
+
+            setTimeout(() => {
+                pochaccoImgRef.src = "./pochacco-icon-01.png";
+            }, 2500);
+        }
+
         window.ontouchstart = (e: any) => {
+            if(pochaccoRef) {
+                touchTimer = setTimeout(handleKiss, 500);
+            }
+        }
+        
+        window.ontouchend = (e: any) => {
+            if(touchTimer) {
+                clearTimeout(touchTimer);
+            }
+            
             if (pochaccoRef) {
                 const pBox = pochaccoRef.getBoundingClientRect();
                 if (e.touches[0].clientY < pBox.top) {
