@@ -58,6 +58,9 @@
                     pY -= 50;
                     setTimeout(() => {
                         pY = pYNow;
+
+                        touchstartY = 0
+                        touchendY = 0
                     }, 250);
                 }
             }
