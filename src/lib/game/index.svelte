@@ -115,7 +115,7 @@
     <div
         id="pochacco-icon"
         bind:this={pochaccoRef}
-        style={`transform: translate(${pX}px, ${pY}px)`}
+        style={`transform: translate(calc(-50% + ${pX}px), ${pY}px)`}
     >
         <img src="./pochacco-icon-01.png" alt="" bind:this={pochaccoImgRef} />
     </div>
