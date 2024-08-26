@@ -23,12 +23,6 @@
             if (pochaccoRef) {
                 touchTimer = setTimeout(handleKiss, 500);
             }
-        };
-
-        window.ontouchend = (e: any) => {
-            if (touchTimer) {
-                clearTimeout(touchTimer);
-            }
 
             if (pochaccoRef) {
                 const pBox = pochaccoRef.getBoundingClientRect();
@@ -47,14 +41,12 @@
                 if (e.touches[0].clientX > pBox.right) {
                     pX += 10;
                 }
+            }
+        };
 
-                // if (e.touches[0].clientY < pBox.bottom) {
-                //     pY += 10;
-                // }
-
-                // if (e.touches[0].clientY < pBox.top) {
-                //     pY -= 10;
-                // }
+        window.ontouchend = (e: any) => {
+            if (touchTimer) {
+                clearTimeout(touchTimer);
             }
         };
         window.onkeydown = (e: any) => {
