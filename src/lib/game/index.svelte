@@ -17,19 +17,19 @@
             setTimeout(() => {
                 pochaccoImgRef.src = "./pochacco-icon-01.png";
             }, 2500);
-        }
+        };
 
         window.ontouchstart = (e: any) => {
-            if(pochaccoRef) {
+            if (pochaccoRef) {
                 touchTimer = setTimeout(handleKiss, 500);
             }
-        }
-        
+        };
+
         window.ontouchend = (e: any) => {
-            if(touchTimer) {
+            if (touchTimer) {
                 clearTimeout(touchTimer);
             }
-            
+
             if (pochaccoRef) {
                 const pBox = pochaccoRef.getBoundingClientRect();
                 if (e.touches[0].clientY < pBox.top) {
@@ -144,6 +144,17 @@
             transform: translate(-50%, 0);
         }
     }
+
+    :global(*) {
+        -webkit-touch-callout: none; /* iOS Safari */
+        -webkit-user-select: none; /* Safari */
+        -khtml-user-select: none; /* Konqueror HTML */
+        -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+        user-select: none; /* Non-prefixed version, currently
+                                    supported by Chrome and Opera */
+    }
+
     :global(body) {
         margin: 0;
         padding: 0;
