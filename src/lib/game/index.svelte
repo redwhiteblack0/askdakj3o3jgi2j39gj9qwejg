@@ -31,6 +31,8 @@
     let touchstartY = 0;
     let touchendY = 0;
 
+    let is_kissing = false;
+
     const handle_select_char = async (player_id: number) => {
         const events = [
             {
@@ -220,6 +222,8 @@
         };
 
         const handleKiss = async () => {
+            is_kissing = true;
+
             const oldMyCharImgSrc = myCharImgRef.src;
             const oldOCharImgSrc = oCharImgRef.src;
 
@@ -238,6 +242,8 @@
             setTimeout(() => {
                 myCharImgRef.src = oldMyCharImgSrc;
                 oCharImgRef.src = oldOCharImgSrc
+
+                is_kissing = false
             }, 2500);
 
             const events = [
@@ -265,13 +271,17 @@
         };
 
         window.ontouchstart = async (e: any) => {
+            if(is_kissing) {
+                return
+            }
+
             touchstartY = e.changedTouches[0].screenY;
 
             const events = [];
             const current_pos = { pX: my_pY, pY: my_pY };
 
             if (myCharRef) {
-                touchTimer = setTimeout(handleKiss, 500);
+                touchTimer = setTimeout(async () => await handleKiss(), 500);
             }
 
             if (myCharRef) {
@@ -343,7 +353,16 @@
             const events = [];
             const current_pos = { pX: my_pY, pY: my_pY };
 
+            if (touchTimer) {
+                clearTimeout(touchTimer);
+                is_kissing = false;
+            }
+
             if (myCharRef) {
+                if(is_kissing) {
+                    return
+                }
+
                 if (touchendY < touchstartY) {
                     const pYNow = my_pY;
                     my_pY -= 50;
@@ -377,14 +396,14 @@
                     console.log("ERROR SENDING EVENTS TO API: ", err);
                 }
             }
-
-            if (touchTimer) {
-                clearTimeout(touchTimer);
-            }
         };
 
 
         window.onkeydown = async (e: any) => {
+            if(is_kissing) {
+                return
+            }
+
             const events = [];
             const current_pos = { pX: my_pY, pY: my_pY };
 
@@ -521,7 +540,7 @@
                 <p>Select Your Character</p>
             </div> -->
         </div>
-    {:else}
+    {:else} 
         <div
             id="pochacco-icon"
             bind:this={oCharRef}
